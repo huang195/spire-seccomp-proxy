@@ -87,7 +87,21 @@ and you should see a seccomp section like the following:
         },
 ```
 
-This matches the [audit.json](profiles/audit.json) profile that audit-pod has specified.
+This matches the [audit.json](profiles/audit.json) profile that audit-pod has
+specified. Run `dmesg` and you should see all syscalls made by this pod are
+logged, similar to
+```
+[219918.682959] audit: type=1326 audit(1680708625.266:1698): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=148225 comm="http-echo" exe="/http-echo" sig=0 arch=c000003e syscall=270 compat=0 ip=0x4559b1 code=0x7ffc0000
+[219918.683121] audit: type=1326 audit(1680708625.266:1699): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=148225 comm="http-echo" exe="/http-echo" sig=0 arch=c000003e syscall=228 compat=0 ip=0x7fff4e4efa5d code=0x7ffc0000
+[219918.683187] audit: type=1326 audit(1680708625.266:1700): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=148225 comm="http-echo" exe="/http-echo" sig=0 arch=c000003e syscall=202 compat=0 ip=0x455e53 code=0x7ffc0000
+```
+
+If you want to create more syscall activities, you can do
+```
+kubectl run -it bash --image=bash --restart=Never bash
+apk add curl
+curl <audit pod IP>:5678
+```
 
 ## Install seccomp profiles using security profile operator
 
