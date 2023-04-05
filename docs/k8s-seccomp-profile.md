@@ -71,4 +71,31 @@ docker cp profiles/ kind-worker:/var/lib/kubelet/seccomp
 Note that `/var/lib/kubelet/seccomp` might not exist, in which case, we might need
 to manually create that directory before running the `docker cp` command.
 
-Once the seccomp profiles are installed, pods can be created specifying those installed profiles. An example is [audit-pod.yaml](../pods/audit-pod.yaml)
+Once the seccomp profiles are installed, pods can be created specifying those
+installed profiles. An example is [audit-pod.yaml](../pods/audit-pod.yaml)
+```
+kubectl apply -f pods/audit-pod.yaml
+```
+
+Once this pod is in the running state, we can manually verify that the specified
+seccomp profile is indeed applied. In the kind worker node, run `crictl inspect <audit pod id>`,
+and you should see a seccomp section like the following:
+
+```
+        "seccomp": {
+          "defaultAction": "SCMP_ACT_LOG"
+        },
+```
+
+This matches the [audit.json](profiles/audit.json) profile that audit-pod has specified.
+
+## Install seccomp profiles using security profile operator
+
+In a more realistic setting, we might not have direct access to the K8s worker
+nodes to copy the security profile files to /var/lib/kubelet/seccomp`.
+Potentially, we could use [Security Profile
+Operator](https://github.com/kubernetes-sigs/security-profiles-operator) to
+accomplish this task.
+
+More investigation is needed...
+
