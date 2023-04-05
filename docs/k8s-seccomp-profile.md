@@ -71,4 +71,4 @@ docker cp profiles/ kind-worker:/var/lib/kubelet/seccomp
 Note that `/var/lib/kubelet/seccomp` might not exist, in which case, we might need
 to manually create that directory before running the `docker cp` command.
 
-Once the seccomp profiles are installed, pods can be created specifying those installed profiles. An example is [audit-pod.yaml)(../pods/audit-pod.yaml)
+Once the seccomp profiles are installed, pods can be created specifying those installed profiles. An example is [audit-pod.yaml](../pods/audit-pod.yaml)
