@@ -45,6 +45,6 @@ The name of the directory was created using a template from notify.json here:
 ```
 
 This demonstrates that the mkdir() syscall was captured by seccomp, the
-seccompagent was infored of the syscall and its context via a Unix domain
+seccompagent was informed of the syscall and its context via a Unix domain
 socket, and was able to nsenter into the pod filesystem namespace to create a
 new directory with the templated name.
