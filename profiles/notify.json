@@ -5,7 +5,7 @@
    ],
    "defaultAction" : "SCMP_ACT_ALLOW",
    "listenerPath": "/run/seccomp-agent.socket",
-   "listenerMetadata": "MKDIR_TMPL=-{{.Namespace}}-{{.Pod}}-{{.Container}}\nEXEC_PATTERN=/bin/true\nEXEC_DURATION=2s\nMOUNT_PROC=true",
+   "listenerMetadata": "SPIRE=1\nMKDIR_TMPL=-{{.Namespace}}-{{.Pod}}-{{.Container}}\nEXEC_PATTERN=/bin/true\nEXEC_DURATION=2s\nMOUNT_PROC=true",
    "syscalls" : [
       {
          "action" : "SCMP_ACT_NOTIFY",
