@@ -83,3 +83,27 @@ We can then deploy our seccomp agent
 kubectl apply -f deploy/seccompagent.yaml
 ```
 
+## Deploy workload
+
+We are going to use `openssl`'s builtin client and server to demonstrate the use
+of certificates in establishing a mTLS connection. First, deploy the server
+
+```
+kubectl apply -f pods/openssl-server.yaml
+```
+
+Once the server is shown as running, deploy the client process
+
+```
+kubectl apply -f pods/openssl-client.yaml
+```
+
+Use `kubectl logs` to check for error messages, but if everything went well,
+log messages should say the TLS handshake finished successfully. Also, we can 
+verify that the certificate and key files are auto-injected to the workload
+pod's /tmp directory.
+
+```
+$ kubectl exec -it openssl-server -- ls /tmp
+bundle.0.pem  svid.0.key    svid.0.pem
+```
