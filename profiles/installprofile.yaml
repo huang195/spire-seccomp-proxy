@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: seccomp-profile-installer
+spec:
+  template:
+    spec:
+      containers:
+      - name: seccomp-profile-installer
+        image: haih/seccomp-profile-installer
+        imagePullPolicy: Always
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 0
+          runAsGroup: 0
+        volumeMounts:
+        - mountPath: /hostvar
+          name: hostvar
+      volumes:
+      - name: hostvar
+        hostPath:
+          path: /var
+      restartPolicy: Never

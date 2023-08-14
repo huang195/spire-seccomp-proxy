@@ -83,6 +83,18 @@ We can then deploy our seccomp agent
 kubectl apply -f deploy/seccompagent.yaml
 ```
 
+### Non-Kind cluster
+
+On a cluster that is not Kind, you won't be able to just `docker cp` the seccomp
+profile into the host file system as shown above. Alternatively, on those clusters,
+you can install the seccomp profile by
+
+```
+kubectl apply -f profiles/installprofile.yaml
+```
+
+There is a simple `Dockerfile` there, and you can modify it to fit your need.
+
 ## Deploy workload
 
 We are going to use `openssl`'s builtin client and server to demonstrate the use
