@@ -119,3 +119,7 @@ pod's /tmp directory.
 $ kubectl exec -it openssl-server -- ls /tmp
 bundle.0.pem  svid.0.key    svid.0.pem
 ```
+
+## To run ssh server/client in podman
+
+podman container run -it --rm --entrypoint=/bin/bash finalgene/openssh
