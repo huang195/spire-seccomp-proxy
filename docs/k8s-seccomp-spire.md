@@ -83,6 +83,12 @@ We can then deploy our seccomp agent
 kubectl apply -f deploy/seccompagent.yaml
 ```
 
+Note: in an Openshift cluster, due to SCC, we need to run the following command before deploying
+the seccomp agent:
+```
+oc adm policy add-scc-to-user privileged system:serviceaccount:seccomp-agent:seccomp-agent
+```
+
 ### Non-Kind cluster
 
 On a cluster that is not Kind, you won't be able to just `docker cp` the seccomp

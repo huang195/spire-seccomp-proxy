@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: build
+spec:
+  restartPolicy: Never
+  containers:
+  - name: build
+    image: docker.io/haih/build:latest
+    imagePullPolicy: Always
+    command: ["sh"]
+    args: ["-c", "sleep infinity"]

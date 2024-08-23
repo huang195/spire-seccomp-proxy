@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: open-s
+spec:
+  restartPolicy: Never
+  securityContext:
+    seccompProfile:
+      type: Localhost
+      localhostProfile: profiles/notify.json
+  containers:
+  - name: open-s
+    image: docker.io/haih/open:latest
+    command: ["sh"]
+    args: ["-c", "sleep infinity"]

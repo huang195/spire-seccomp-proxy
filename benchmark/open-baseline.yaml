@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: open
+spec:
+  restartPolicy: Never
+  hostPID: true
+  containers:
+  - name: open
+    image: docker.io/haih/open:latest
+    securityContext:
+      privileged: true
+      capabilities:
+        add:
+          - SYS_ADMIN
+          - SYS_PTRACE
+          - PERFMON
+    command: ["sh"]
+    args: ["-c", "sleep infinity"]
+    volumeMounts:
+    - name: sysfs
+      mountPath: /sys
+    - name: perf
+      mountPath: /proc
+  volumes:
+  - name: sysfs
+    hostPath:
+      path: /sys
+  - name: perf
+    hostPath:
+      path: /proc

@@ -73,7 +73,7 @@ spec:
         - name: cgroup
           mountPath: /sys/fs/cgroup
         - name: spire-agent-socket
-          mountPath: /run/spire/sockets
+          mountPath: /run/spire/agent-sockets
           readOnly: true
       tolerations:
       - effect: NoSchedule
@@ -92,5 +92,13 @@ spec:
           path: /sys/fs/cgroup
       - name: spire-agent-socket
         hostPath:
-          path: /run/spire/sockets
+          path: /run/spire/agent-sockets
           type: Directory
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/worker
+                operator: Exists
+
