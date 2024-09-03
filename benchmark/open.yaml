@@ -4,7 +4,6 @@ metadata:
   name: open-s
 spec:
   restartPolicy: Never
-  hostPID: true
   securityContext:
     seccompProfile:
       type: Localhost
@@ -12,24 +11,5 @@ spec:
   containers:
   - name: open-s
     image: docker.io/haih/open:latest
-    securityContext:
-      privileged: true
-      capabilities:
-        add:
-          - SYS_ADMIN
-          - SYS_PTRACE
-          - PERFMON
     command: ["sh"]
     args: ["-c", "sleep infinity"]
-    volumeMounts:
-    - name: sysfs
-      mountPath: /sys
-    - name: perf
-      mountPath: /proc
-  volumes:
-  - name: sysfs
-    hostPath:
-      path: /sys
-  - name: perf
-    hostPath:
-      path: /proc

@@ -5,11 +5,13 @@
    ],
    "defaultAction" : "SCMP_ACT_ALLOW",
    "listenerPath": "/run/seccomp-agent.socket",
-   "listenerMetadata": "SPIRE=1",
+   "listenerMetadata": "LZT=1\nSPIRE=1",
    "syscalls" : [
       {
          "action" : "SCMP_ACT_NOTIFY",
          "names" : [
+            "connect",
+            "accept",
             "openat",
             "open",
             "stat"
