@@ -44,6 +44,7 @@ spec:
       - name: seccomp-agent
         image: docker.io/haih/spireseccompagent:latest-WIP
         command: [ "/bin/seccompagent", "-resolver=kubernetes", "-log=info" ]
+        #command: [ "/bin/seccompagent", "-resolver=kubernetes", "-log=trace" ]
         imagePullPolicy: Always
         env:
           - name: NODE_NAME

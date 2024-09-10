@@ -6,6 +6,6 @@ spec:
   restartPolicy: Never
   containers:
   - name: container1
-    image: busybox
+    image: docker.io/haih/notify:latest
     command: ["sh"]
     args: ["-c", "sleep infinity"]
