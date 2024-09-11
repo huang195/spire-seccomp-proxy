@@ -42,7 +42,7 @@ spec:
       hostPID: true
       containers:
       - name: seccomp-agent
-        image: docker.io/haih/spireseccompagent:latest-WIP
+        image: docker.io/haih/spireseccompagent:latest
         command: [ "/bin/seccompagent", "-resolver=kubernetes", "-log=info" ]
         #command: [ "/bin/seccompagent", "-resolver=kubernetes", "-log=trace" ]
         imagePullPolicy: Always
