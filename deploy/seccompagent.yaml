@@ -42,7 +42,7 @@ spec:
       hostPID: true
       containers:
       - name: seccomp-agent
-        image: docker.io/haih/spireseccompagent:kind
+        image: docker.io/haih/spireseccompagent:latest
         #command: [ "/bin/seccompagent", "-resolver=kubernetes", "-log=trace" ]
         command: [ "/bin/seccompagent", "-resolver=kubernetes", "-log=info" ]
         imagePullPolicy: Always
@@ -74,7 +74,7 @@ spec:
         - name: cgroup
           mountPath: /sys/fs/cgroup
         - name: spire-agent-socket
-          mountPath: /run/spire/sockets
+          mountPath: /run/spire/agent-sockets
           readOnly: true
       tolerations:
       - effect: NoSchedule
@@ -93,5 +93,5 @@ spec:
           path: /sys/fs/cgroup
       - name: spire-agent-socket
         hostPath:
-          path: /run/spire/sockets
+          path: /run/spire/agent-sockets
           type: Directory
